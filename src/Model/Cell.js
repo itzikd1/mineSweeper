@@ -1,11 +1,11 @@
 import {makeAutoObservable} from "mobx";
 
 export default class Cell {
-    value: 0;
-    x: 0;
-    y: 0;
-    revealed: false;
-    flag: false;
+    value;
+    x;
+    y;
+    revealed;
+    flag;
 
     constructor(x, y) {
         makeAutoObservable(this);
@@ -16,6 +16,10 @@ export default class Cell {
         this.value = 0;
     }
 
+    getVal = () => {
+        return this.value
+    };
+
     toggleFlag = () => (this.flag = !this.flag);
 
     toggleRevealed = () => (this.revealed = !this.revealed);
@@ -23,6 +27,8 @@ export default class Cell {
     clickCell = () => {
         if (this.flag !== true & this.revealed === false) {
             return this.revealed = true;
+        } else {
+            return this.value = this.value + 1
         }
     }
 }

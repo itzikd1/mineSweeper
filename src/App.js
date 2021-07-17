@@ -4,7 +4,7 @@ import NavBar from './Components/NavBar';
 import Setting from './Components/Settings'
 import React from "react";
 import {useBoard} from './Components/BoardProvidor';
-import BoardHtml from "./Components/BoardHtml";
+import BoardHtml from "./Components/BoardComponent";
 
 
 function App() {

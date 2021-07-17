@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {useLocalObservable} from "mobx-react";
-import Board from './Board';
+import Board from '../Model/Board';
 
 const BoardContext = React.createContext();
 
