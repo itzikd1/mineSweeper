@@ -20,6 +20,7 @@
 
 #other
 .idea/*
+.idea/
 
 
 npm-debug.log*
