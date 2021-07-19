@@ -1,14 +1,17 @@
-import {observer} from "mobx-react-lite";
+import {observer} from "mobx-react";
+import {useBoard} from "../Model/GameProvidor";
 import {Button} from "react-bootstrap";
 import React from "react";
 
-
-export default observer(({cell}) => {
+function Cell({cell}) {
+    const {revealed, flag, value} = cell;
+    const game = useBoard();
 
     return (
         <>
-            <Button onClick={cell.clickCell}>{cell.getVal()}</Button>
+            <Button onClick={() => game.unveilCell(cell)}>{revealed ? "2" : "?"}</Button>
         </>
-    );
+    )
+}
 
-})
+export default observer(Cell);

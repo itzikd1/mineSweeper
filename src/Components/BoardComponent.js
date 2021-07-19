@@ -1,17 +1,14 @@
 import CellHtml from "./CellComponent";
 import {observer} from "mobx-react-lite";
-import {useBoard} from "./BoardProvidor";
+import {useBoard} from "../Model/GameProvidor";
 import React from "react";
 
 
-export default observer(() => {
+function BoardComponent() {
     const game = useBoard();
-    let liveGame = game.startGame();
 
     return (<>
-            <div>
-            </div>
-            {liveGame.map((row, x) => {
+            {game.board.map((row, x) => {
                 return (
                     <div>
                         {row.map((cell, y) => (
@@ -21,5 +18,7 @@ export default observer(() => {
                 );
             })}
         </>
-    );
-})
+    )
+}
+
+export default observer(BoardComponent)

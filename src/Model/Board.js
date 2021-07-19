@@ -3,26 +3,39 @@ import Cell from "./Cell";
 
 
 export default class Board {
+    board = [];
+    numOfMines = 2;
+    points = 0;
 
-    height;
-    width;
-    board;
-
-    constructor(height, width) {
+    constructor() {
         makeAutoObservable(this);
-        this.height = height;
-        this.width = width;
     }
 
-    startGame = () => {
+    startGame = (height, width, numOfMines) => {
         this.board = [];
-        for (let x = 0; x < this.width; x++) {
+        this.numOfMines = numOfMines;
+        this.points = 0;
+        for (let x = 0; x < width; x++) {
             let subCol = [];
-            for (let y = 0; y < this.height; y++) {
+            for (let y = 0; y < height; y++) {
                 subCol.push(new Cell(x, y));
             }
             this.board.push(subCol);
         }
-        return this.board;
+        return this;
+    };
+
+    unveilCell = (cell) => {
+        cell.toggleRevealed();
+        const {x, y} = cell;
+        const updatedBoard = [...this.board];
+        const updatedRow = [...updatedBoard[x]];
+        const updatedCell = new Cell(this.board[x][y]);
+        updatedCell.toggleRevealed();
+        updatedRow[y] = updatedCell;
+        updatedBoard[x] = updatedRow;
+        this.board = updatedBoard;
     }
+
+
 }

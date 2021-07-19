@@ -1,7 +1,7 @@
 import {Col, Container, Form, FormControl, InputGroup, Row} from "react-bootstrap";
 import React from "react";
 
-export default function Settings() {
+export default function Settings({height, onChangeHeight, width, onChangeWidth, numOfMines, onChangeNumOfMines}) {
     return (
         <>
             <Container>
@@ -11,6 +11,8 @@ export default function Settings() {
                             <InputGroup.Text>Board Width</InputGroup.Text>
                             <FormControl
                                 placeholder="Width"
+                                value={height}
+                                onChange={(e) => onChangeHeight(e.target.value)}
                                 aria-label="Width"
                             />
                         </Row>
@@ -19,6 +21,8 @@ export default function Settings() {
                         <InputGroup.Text>Board Height</InputGroup.Text>
                         <FormControl
                             placeholder="Height"
+                            value={width}
+                            onChange={(e) => onChangeWidth(e.target.value)}
                             aria-label="Height"
                         />
                     </Col>
@@ -26,6 +30,8 @@ export default function Settings() {
                         <InputGroup.Text>Number Of Mines</InputGroup.Text>
                         <FormControl
                             placeholder="Mines"
+                            value={numOfMines}
+                            onChange={(e) => onChangeNumOfMines(e.target.value)}
                             aria-label="Mines"
                         />
                     </Col>

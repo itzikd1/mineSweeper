@@ -4,15 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import BoardProvidor from './Components/BoardProvidor';
+import BoardProvidor from './Model/GameProvidor';
 
 
 ReactDOM.render(
-    <React.StrictMode>
-        <BoardProvidor>
-            <App/>
-        </BoardProvidor>
-    </React.StrictMode>,
+    <BoardProvidor length={3} height={3} numOfMines={3}>
+        <App/>
+    </BoardProvidor>,
     document.getElementById('root')
 );
 
