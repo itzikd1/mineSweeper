@@ -24,7 +24,7 @@ function App() {
             }}>Start Game</Button>
             <Button variant="success" onClick={() => {
                 game.deployMines()
-            }}>Deploy Mines Game</Button>
+            }}>Deploy Mines</Button>
             <BoardHtml></BoardHtml>
         </div>
     );

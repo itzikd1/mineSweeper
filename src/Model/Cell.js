@@ -8,12 +8,12 @@ export default class Cell {
     flag;
 
     constructor(x, y) {
-        makeAutoObservable(this);
         this.x = x;
         this.y = y;
         this.revealed = false;
         this.flag = false;
         this.value = 0;
+        makeAutoObservable(this);
     }
 
     getVal = () => {
