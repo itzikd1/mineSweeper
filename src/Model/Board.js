@@ -26,6 +26,8 @@ export default class Board {
             }
             this.board.push(subCol);
         }
+        //deploy minds
+        this.deployMines();
         return this;
     };
 
@@ -41,12 +43,7 @@ export default class Board {
         //create random array - way to deploy minds
         let randNums = [];
         let maxLoop;
-        if (this.boardSize() > this.numOfMines)
-            maxLoop = this.numOfMines;
-        else
-            console.log("to many bombs");
-        // todo alert that bomb amount need to be smaller then
-        for (let i = 0; i < maxLoop; i++) {
+        for (let i = 0; i < this.boardSize(); i++) {
             randNums.push(i)
         }
         // shuffle the array
@@ -61,19 +58,27 @@ export default class Board {
             randNums[j] = temp;
             i--
         }
-        console.log(randNums);
 
-        //
-        // //todo check that number of mines<board size
-        // let boardSize = this.board.height * this.board.length;
-        // let bombArray = randNums;
-        // for (let x = 0; x < this.width; x++) {
-        //     let subCol = [];
-        //     for (let y = 0; y < this.height; y++) {
-        //         //add the bombs
-        //     }
-        //     this.board.push(subCol);
-        // }
+        //take only the number of bombs that you need
+        const slicedArray = randNums.slice(0, this.numOfMines);
+
+        // todo alert that bomb amount need to be smaller than board size
+
+        //sort the array and deploy to board
+        slicedArray.sort(function (a, b) {
+            return a - b
+        });
+        let arrayLocation = 0;
+        let countLoop = 0;
+        for (let x = 0; x < this.width; x++) {
+            for (let y = 0; y < this.height; y++) {
+                if (slicedArray[arrayLocation] === countLoop) {
+                    arrayLocation++;
+                    this.board[x][y].setBomb();
+                }
+                countLoop++
+            }
+        }
         return this.board;
     }
 

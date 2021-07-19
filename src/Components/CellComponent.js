@@ -9,7 +9,7 @@ function Cell({cell}) {
 
     return (
         <>
-            <Button onClick={() => game.unveilCell(cell)}>{revealed ? "2" : "?"}</Button>
+            <Button onClick={() => game.unveilCell(cell)}>{revealed ? value : "?"}</Button>
         </>
     )
 }
