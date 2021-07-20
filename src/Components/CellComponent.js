@@ -7,9 +7,20 @@ function Cell({cell}) {
     const {revealed, flag, value} = cell;
     const game = useBoard();
 
+    function cellState() {
+        if (flag) {
+            return "F"
+        } else if (revealed)
+            return value;
+        else
+            return "?"
+    }
+
     return (
         <>
-            <Button onClick={() => game.unveilCell(cell)}>{revealed ? value : "?"}</Button>
+            <Button onContextMenu={(e) => game.rightClick(e, cell)}
+                    onClick={() => game.unveilCell(cell)}>
+                {cellState()}</Button>
         </>
     )
 }

@@ -35,8 +35,22 @@ export default class Board {
         cell.toggleRevealed();
     };
 
+    rightClick = (e, cell) => {
+        e.preventDefault();
+        cell.toggleFlag()
+    };
+
     boardSize() {
         return this.height * this.width
+    }
+
+    cellState() {
+        if (flag) {
+            return "F"
+        } else if (revealed)
+            return value;
+        else
+            return "?"
     }
 
     deployMines() {

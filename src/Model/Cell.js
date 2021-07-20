@@ -20,21 +20,18 @@ export default class Cell {
         return this.value
     };
 
-    setValue = (val) => (this.value = val);
-
-    setBomb = () => (this.value = 9);     //9 means bomb
+    setBomb = () => (this.value = "B"); //B means bomb
 
     toggleFlag = () => (this.flag = !this.flag);
 
     toggleRevealed = () => (this.revealed = !this.revealed);
 
     clickCell = () => {
-        console.log("cell clicked ", this);
         //if no flag and unrevealed, reveal the cell
-        if (this.flag !== true & this.revealed === false) {
-            return this.revealed = true;
-        } else { //todo for testing, change in the future
-            return this.value = this.value + 1
+        if (!this.flag & !this.revealed) {
+            this.revealed = true;
+        } else {
+            return this.value;
         }
     }
 }
