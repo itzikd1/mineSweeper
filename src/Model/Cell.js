@@ -22,16 +22,14 @@ export default class Cell {
 
     setBomb = () => (this.value = "B"); //B means bomb
 
-    toggleFlag = () => (this.flag = !this.flag);
+    toggleFlag = () => {
+        if (this.revealed === false)
+            this.flag = !this.flag
+    };
 
-    toggleRevealed = () => (this.revealed = !this.revealed);
+    toggleRevealed = () => {
+        if (!this.revealed && !this.flag)
+            this.revealed = true
+    };
 
-    clickCell = () => {
-        //if no flag and unrevealed, reveal the cell
-        if (!this.flag & !this.revealed) {
-            this.revealed = true;
-        } else {
-            return this.value;
-        }
-    }
 }
