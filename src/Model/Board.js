@@ -44,15 +44,6 @@ export default class Board {
         return this.height * this.width
     }
 
-    cellState() {
-        if (flag) {
-            return "F"
-        } else if (revealed)
-            return value;
-        else
-            return "?"
-    }
-
     deployMines() {
         //create random array - way to deploy minds
         let randNums = [];
