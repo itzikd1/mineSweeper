@@ -58,11 +58,14 @@ export default class Board {
     };
 
     //toggle cell - left click
-    unveilCell = (cell) => {
-        cell.toggleRevealed();
-        if (cell.isBomb())
-            this.gameStatus = "Lose";
-        return this.gameStatus
+    unveilCell = (e, cell) => {
+        if (e.shiftKey)
+            this.flagClick()
+        else {
+            cell.toggleRevealed();
+            if (cell.isBomb())
+                this.gameStatus = "Lose";
+        }
     };
 
     //toggle cell - right click
@@ -70,11 +73,11 @@ export default class Board {
         e.preventDefault();
         if (cell.flag) {
             cell.toggleFlag()
-            this.numOfFlags+=1
+            this.numOfFlags += 1
         } else {
             if (this.numOfFlags > 0) {
                 cell.toggleFlag()
-                this.numOfFlags-=1
+                this.numOfFlags -= 1
             } else {
                 console.log("no flags")
                 //todo alert that no flag

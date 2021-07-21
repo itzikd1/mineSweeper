@@ -22,8 +22,8 @@ function Cell({cell}) {
         <>
             <Button
                 onContextMenu={(e) => game.flagClick(e, cell)}
-                onClick={() => {
-                    game.unveilCell(cell);
+                onClick={(e) => {
+                    game.unveilCell(e,cell);
                     if (game.gameStatus === "Lose") {
                         setModalShow(true);
                     }
