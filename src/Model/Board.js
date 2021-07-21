@@ -8,6 +8,7 @@ export default class Board {
     board = [];
     numOfMines = 2;
     points = 0;
+    gameStatus = "Normal";
 
     constructor() {
         makeAutoObservable(this);
@@ -16,6 +17,10 @@ export default class Board {
     //start game, set board size, deploy minds, update numbers according to bombs
     startGame = (height, width, numOfMines) => {
         this.board = [];
+        if (height > 300)
+            height = 300;
+        if (width > 300)
+            width = 300;
         this.height = height;
         this.width = width;
         this.numOfMines = numOfMines;
@@ -35,6 +40,9 @@ export default class Board {
     //toggle cell - left click
     unveilCell = (cell) => {
         cell.toggleRevealed();
+        if (cell.isBomb())
+            this.gameStatus = "Lose";
+        return this.gameStatus
     };
 
     //toggle cell - right click

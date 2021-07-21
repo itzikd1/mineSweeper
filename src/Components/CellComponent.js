@@ -19,7 +19,13 @@ function Cell({cell}) {
     return (
         <>
             <Button onContextMenu={(e) => game.rightClick(e, cell)}
-                    onClick={() => game.unveilCell(cell)}>
+                    onClick={() => {
+                        game.unveilCell(cell);
+                        if (game.gameStatus === "Lose")
+                            console.log("lose")
+                        // Todo alert player lost + show map
+                    }
+                    }>
                 {cellState()}</Button>
         </>
     )

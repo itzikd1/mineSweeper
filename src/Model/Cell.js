@@ -18,6 +18,8 @@ export default class Cell {
 
     setBomb = () => (this.value = "B"); //B means bomb
 
+    isBomb = () => (this.value === "B"); //B means bomb
+
     toggleFlag = () => {
         if (this.revealed === false)
             this.flag = !this.flag

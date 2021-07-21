@@ -20,7 +20,9 @@ function App() {
             <Setting height={height} onChangeHeight={setHeight} width={width} onChangeWidth={setWidth}
                      numOfMines={numOfMines} onChangeNumOfMines={setNumOfMines}/>
             <Button variant="success" onClick={() => {
-                game.startGame(height, width, numOfMines)
+                game.startGame(height, width, numOfMines);
+                setHeight(game.height);
+                setWidth(game.width)
             }}>Start Game</Button>
             <Button variant="warning" onClick={() => {
                 game.setCellNeighbours()
