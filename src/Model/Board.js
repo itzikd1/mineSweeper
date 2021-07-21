@@ -79,6 +79,8 @@ export default class Board {
             this.flagClick();
             this.checkIfWin();
         } else {
+            if (cell.revealed && cell.isBomb())
+                return
             cell.toggleRevealed();
             if (cell.isBomb())
                 this.gameStatus = "Lose";
@@ -90,19 +92,20 @@ export default class Board {
     //toggle cell - right click
     flagClick = (e, cell, setModalFlagShow) => {
         e.preventDefault();
-        if (cell.flag) {
-            cell.toggleFlag();
-            this.numOfFlags += 1
-        } else {
-            if (this.numOfFlags > 0) {
+        if (!cell.revealed) {
+            if (cell.flag) {
                 cell.toggleFlag();
-                this.numOfFlags -= 1
-                this.checkIfWin();
+                this.numOfFlags += 1
             } else {
-                setModalFlagShow(true)
+                if (this.numOfFlags > 0) {
+                    cell.toggleFlag();
+                    this.numOfFlags -= 1
+                    this.checkIfWin();
+                } else {
+                    setModalFlagShow(true)
+                }
             }
         }
-
     };
 
     //deploy mines in random way
@@ -188,6 +191,7 @@ export default class Board {
         return this.board;
     }
 
+    //check if all flags are on bombs - win
     checkIfWin = () => {
         if (this.numOfFlags === 0) {
             for (let x = 0; x < this.width; x++) {
@@ -198,6 +202,14 @@ export default class Board {
                 }
             }
             this.gameStatus = "Win"
+        }
+    }
+
+    supermanMode = () => {
+        for (let x = 0; x < this.width; x++) {
+            for (let y = 0; y < this.height; y++) {
+                this.board[x][y].revealed = true;
+            }
         }
     }
 }
