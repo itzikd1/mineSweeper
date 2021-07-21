@@ -69,7 +69,7 @@ export default class Board {
     };
 
     //toggle cell - right click
-    flagClick = (e, cell) => {
+    flagClick = (e, cell, setModalFlagShow) => {
         e.preventDefault();
         if (cell.flag) {
             cell.toggleFlag()
@@ -79,8 +79,7 @@ export default class Board {
                 cell.toggleFlag()
                 this.numOfFlags -= 1
             } else {
-                console.log("no flags")
-                //todo alert that no flag
+                setModalFlagShow(true)
             }
         }
 
