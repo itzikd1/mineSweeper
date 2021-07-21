@@ -45,6 +45,11 @@ export default class Board {
         return this.board[x][y].value === "B";
     }
 
+    //check if cell is zero
+    isZero(x, y) {
+        return this.board[x][y].value === 0;
+    }
+
     //check if cell has a flag
     isFlag(x, y) {
         return this.board[x][y].flag === true;
@@ -81,7 +86,10 @@ export default class Board {
         } else {
             if (cell.revealed && cell.isBomb())
                 return
-            cell.toggleRevealed();
+            else if (cell.value === 0)
+                this.revealAllEmpty(cell.x, cell.y)
+            else
+                cell.toggleRevealed();
             if (cell.isBomb())
                 this.gameStatus = "Lose";
             else this.checkIfWin();
@@ -210,6 +218,36 @@ export default class Board {
             for (let y = 0; y < this.height; y++) {
                 this.board[x][y].revealed = true;
             }
+        }
+    }
+
+    revealAllEmpty(x, y) {
+        if (!this.isZero(x, y) || this.isBomb(x, y) || this.isFlag(x, y) || this.board[x][y].revealed)
+            return
+        this.board[x][y].revealed = true
+        if (x > 0) {
+            if (this.isZero(x - 1, y))
+                this.revealAllEmpty(x - 1, y)
+            if (y > 0 && this.isZero(x - 1, y - 1))
+                this.revealAllEmpty(x - 1, y - 1)
+            if (y < this.height - 1 && this.isZero(x - 1, y + 1))
+                this.revealAllEmpty(x - 1, y + 1)
+        }
+        if (x < this.width - 1) {
+            if (this.isZero(x + 1, y))
+                this.revealAllEmpty(x + 1, y)
+            if (y > 0 && this.isZero(x + 1, y - 1))
+                this.revealAllEmpty(x + 1, y - 1)
+            if (y < this.height - 1 && this.isZero(x + 1, y + 1))
+                this.revealAllEmpty(x + 1, y + 1)
+        }
+        if (y > 0) {
+            if (this.isZero(x, y - 1))
+                this.revealAllEmpty(x, y - 1)
+        }
+        if (y < this.height - 1) {
+            if (this.isZero(x, y + 1))
+                this.revealAllEmpty(x, y + 1)
         }
     }
 }

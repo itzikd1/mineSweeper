@@ -26,9 +26,6 @@ function App() {
                 setHeight(game.height);
                 setWidth(game.width);
             }}>Start Game</Button>
-            <Button variant="warning" onClick={() => {
-                game.setCellNeighbours()
-            }}>update neighbors</Button>
             <BoardComponent></BoardComponent>
         </div>
     );
