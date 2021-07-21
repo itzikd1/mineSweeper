@@ -18,7 +18,7 @@ function Cell({cell}) {
 
     return (
         <>
-            <Button onContextMenu={(e) => game.rightClick(e, cell)}
+            <Button onContextMenu={(e) => game.flagClick(e, cell)}
                     onClick={() => {
                         game.unveilCell(cell);
                         if (game.gameStatus === "Lose")

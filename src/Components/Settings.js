@@ -36,6 +36,15 @@ export default function Settings({height, onChangeHeight, width, onChangeWidth, 
                         />
                     </Col>
                     <Col>
+                        <InputGroup.Text>Number Of Flags</InputGroup.Text>
+                        <FormControl
+                            placeholder="Flags"
+                            value={game.numOfFlags}
+                            onChange={(e) => onChangeNumOfMines(e.target.value)}
+                            aria-label="Mines"
+                        />
+                    </Col>
+                    <Col>
                         <Form>
                             <Form.Check
                                 id="switchEnabled"

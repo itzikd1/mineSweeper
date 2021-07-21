@@ -14,17 +14,36 @@ export default class Board {
         makeAutoObservable(this);
     }
 
-    //start game, set board size, deploy minds, update numbers according to bombs
+    set height(value) {
+        if (value > 300)
+            this._height = 300;
+        if (value<1)
+            this._height=1
+        else
+            this._height = value;
+    }
+
+    set width(value) {
+        if (value > 300)
+            this._width = 300;
+        if (value<1)
+            this._width=1
+        else
+            this._width = value;
+    }
+
+    set numOfFlags(value: number) {
+        this._numOfFlags = value;
+    }
+
+//start game, set board size, deploy minds, update numbers according to bombs
     startGame = (height, width, numOfMines) => {
-        this.board = [];
-        if (height > 300)
-            height = 300;
-        if (width > 300)
-            width = 300;
-        this.height = height;
-        this.width = width;
-        this.numOfMines = numOfMines;
-        this.points = 0;
+        this._board = [];
+        this._height = height;
+        this._width = width;
+        this._numOfMines = numOfMines;
+        this._numOfFlags = numOfMines;
+        this._points = 0;
         for (let x = 0; x < width; x++) {
             let subCol = [];
             for (let y = 0; y < height; y++) {
@@ -46,9 +65,21 @@ export default class Board {
     };
 
     //toggle cell - right click
-    rightClick = (e, cell) => {
+    flagClick = (e, cell) => {
         e.preventDefault();
-        cell.toggleFlag()
+        if (cell.flag === true) {
+            cell.toggleFlag()
+            this._numOfFlags++
+        } else {
+            if (this._numOfFlags > 0) {
+                cell.toggleFlag()
+                this._numOfFlags--
+            } else {
+                console.log("no flags")
+                //todo alert that no flag
+            }
+        }
+
     };
 
     //get board size
