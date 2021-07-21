@@ -15,6 +15,7 @@ export default class Board {
         makeAutoObservable(this);
     }
 
+    //set board height - max 300
     setHeight(value) {
         if (value > 300)
             this.height = 300;
@@ -24,6 +25,7 @@ export default class Board {
             this.height = value;
     }
 
+    //set bored width - max 300
     setWidth(value) {
         if (value > 300)
             this.width = 300;
@@ -33,6 +35,20 @@ export default class Board {
             this.width = value;
     }
 
+    //get board size
+    getBoardSize() {
+        return this.height * this.width
+    }
+
+    //check if cell is bomb
+    isBomb(x, y) {
+        return this.board[x][y].value === "B";
+    }
+
+    //check if cell has a flag
+    isFlag(x, y) {
+        return this.board[x][y].flag === true;
+    }
 
 //start game, set board size, deploy minds, update numbers according to bombs
     startGame = (height, width, numOfMines) => {
@@ -89,11 +105,6 @@ export default class Board {
 
     };
 
-    //get board size
-    getBoardSize() {
-        return this.height * this.width
-    }
-
     //deploy mines in random way
     deployMines() {
         //create random array - way to deploy minds
@@ -131,16 +142,6 @@ export default class Board {
             }
         }
         return this.board;
-    }
-
-    //check if cell is bomb
-    isBomb(x, y) {
-        return this.board[x][y].value === "B";
-    }
-
-    //check if cell has a flag
-    isFlag(x, y) {
-        return this.board[x][y].flag === true;
     }
 
     //go over board and update value of cells around bombs
