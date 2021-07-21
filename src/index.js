@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import BoardProvidor from './Model/GameProvidor';
+import BoardProvidor from './Context/GameProvidor';
 
 
 ReactDOM.render(

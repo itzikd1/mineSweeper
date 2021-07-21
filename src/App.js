@@ -4,7 +4,7 @@ import NavBar from './Components/NavBar';
 import Setting from './Components/Settings'
 import React, {useState} from "react";
 import BoardComponent from "./Components/BoardComponent";
-import {useBoard} from "./Model/GameProvidor";
+import {useBoard} from "./Context/GameProvidor";
 import {observer} from "mobx-react";
 
 
@@ -13,22 +13,23 @@ function App() {
     const [height, setHeight] = useState(3);
     const [width, setWidth] = useState(3);
     const [numOfMines, setNumOfMines] = useState(2);
+    const [numOfFlags, setNumOfFlags] = useState();
 
     return (
         <div className="App">
             <NavBar/>
 
             <Setting height={height} onChangeHeight={setHeight} width={width} onChangeWidth={setWidth}
-                     numOfMines={numOfMines} onChangeNumOfMines={setNumOfMines}/>
+                     numOfMines={numOfMines} onChangeNumOfMines={setNumOfMines} numOfFlags={game.numOfFlags}/>
 
             <Button variant="success" onClick={() => {
                 game.startGame(height, width, numOfMines);
                 setHeight(game.height);
-                setWidth(game.width)
+                setWidth(game.width);
             }}>Start Game</Button>
             <Button variant="warning" onClick={() => {
                 game.setCellNeighbours()
-            }}>update neigbors</Button>
+            }}>update neighbors</Button>
             <BoardComponent></BoardComponent>
         </div>
     );

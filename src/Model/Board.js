@@ -7,43 +7,42 @@ export default class Board {
     width;
     board = [];
     numOfMines = 2;
+    numOfFlags;
     points = 0;
     gameStatus = "Normal";
 
     constructor() {
+        this.numOfFlags=2
         makeAutoObservable(this);
     }
 
-    set height(value) {
+    setHeight(value) {
         if (value > 300)
-            this._height = 300;
-        if (value<1)
-            this._height=1
+            this.height = 300;
+        if (value < 1)
+            this.height = 1
         else
-            this._height = value;
+            this.height = value;
     }
 
-    set width(value) {
+    setWidth(value) {
         if (value > 300)
-            this._width = 300;
-        if (value<1)
-            this._width=1
+            this.width = 300;
+        if (value < 1)
+            this.width = 1
         else
-            this._width = value;
+            this.width = value;
     }
 
-    set numOfFlags(value: number) {
-        this._numOfFlags = value;
-    }
 
 //start game, set board size, deploy minds, update numbers according to bombs
     startGame = (height, width, numOfMines) => {
-        this._board = [];
-        this._height = height;
-        this._width = width;
-        this._numOfMines = numOfMines;
-        this._numOfFlags = numOfMines;
-        this._points = 0;
+        this.board = [];
+        this.height = height;
+        this.width = width;
+        this.numOfMines = numOfMines;
+        this.numOfFlags = numOfMines;
+        this.points = 0;
         for (let x = 0; x < width; x++) {
             let subCol = [];
             for (let y = 0; y < height; y++) {
@@ -67,13 +66,14 @@ export default class Board {
     //toggle cell - right click
     flagClick = (e, cell) => {
         e.preventDefault();
+        console.log(this.numOfFlags)
         if (cell.flag === true) {
             cell.toggleFlag()
-            this._numOfFlags++
+            this.numOfFlags+=1
         } else {
-            if (this._numOfFlags > 0) {
+            if (this.numOfFlags > 0) {
                 cell.toggleFlag()
-                this._numOfFlags--
+                this.numOfFlags-=1
             } else {
                 console.log("no flags")
                 //todo alert that no flag

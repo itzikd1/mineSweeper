@@ -1,7 +1,10 @@
 import {Col, Container, Form, FormControl, InputGroup, Row} from "react-bootstrap";
 import React from "react";
+import {useBoard} from "../Context/GameProvidor";
 
-export default function Settings({height, onChangeHeight, width, onChangeWidth, numOfMines, onChangeNumOfMines}) {
+export default function Settings({height, onChangeHeight, width, onChangeWidth, numOfMines, onChangeNumOfMines, numOfFlags}) {
+    const game = useBoard();
+
     return (
         <>
             <Container>
@@ -39,9 +42,9 @@ export default function Settings({height, onChangeHeight, width, onChangeWidth, 
                         <InputGroup.Text>Number Of Flags</InputGroup.Text>
                         <FormControl
                             placeholder="Flags"
-                            value={game.numOfFlags}
-                            onChange={(e) => onChangeNumOfMines(e.target.value)}
+                            value={numOfFlags}
                             aria-label="Mines"
+                            readOnly
                         />
                     </Col>
                     <Col>

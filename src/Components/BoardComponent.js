@@ -1,6 +1,6 @@
 import CellHtml from "./CellComponent";
 import {observer} from "mobx-react-lite";
-import {useBoard} from "../Model/GameProvidor";
+import {useBoard} from "../Context/GameProvidor";
 import React from "react";
 
 

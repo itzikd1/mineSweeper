@@ -1,5 +1,5 @@
 import {observer} from "mobx-react";
-import {useBoard} from "../Model/GameProvidor";
+import {useBoard} from "../Context/GameProvidor";
 import {Button} from "react-bootstrap";
 import React from "react";
 
