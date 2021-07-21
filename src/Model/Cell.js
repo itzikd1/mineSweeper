@@ -21,7 +21,7 @@ export default class Cell {
     isBomb = () => (this.value === "B"); //B means bomb
 
     toggleFlag = () => {
-        if (this.revealed === false)
+        if (!this.revealed)
             this.flag = !this.flag
     };
 

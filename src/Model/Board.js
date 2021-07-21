@@ -7,12 +7,11 @@ export default class Board {
     width;
     board = [];
     numOfMines = 2;
-    numOfFlags;
+    numOfFlags = 2;
     points = 0;
     gameStatus = "Normal";
 
     constructor() {
-        this.numOfFlags=2
         makeAutoObservable(this);
     }
 
@@ -52,6 +51,8 @@ export default class Board {
         }
         //deploy minds
         this.deployMines();
+        //set numbers around bombs
+        this.setCellNeighbours();
         return this;
     };
 
@@ -66,8 +67,7 @@ export default class Board {
     //toggle cell - right click
     flagClick = (e, cell) => {
         e.preventDefault();
-        console.log(this.numOfFlags)
-        if (cell.flag === true) {
+        if (cell.flag) {
             cell.toggleFlag()
             this.numOfFlags+=1
         } else {
