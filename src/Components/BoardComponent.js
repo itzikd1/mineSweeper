@@ -1,4 +1,4 @@
-import CellHtml from "./CellComponent";
+import CellComponent from "./CellComponent";
 import {observer} from "mobx-react-lite";
 import {useBoard} from "../Context/GameProvidor";
 import React from "react";
@@ -12,7 +12,7 @@ function BoardComponent() {
                 return (
                     <div key={x}>
                         {row.map((cell, y) => (
-                            <CellHtml key={y} cell={cell}/>
+                            <CellComponent key={y} cell={cell}/>
                         ))}
                     </div>
                 );

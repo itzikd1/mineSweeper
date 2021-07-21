@@ -41,6 +41,7 @@ export default class Board {
         this.width = width;
         this.numOfMines = numOfMines;
         this.numOfFlags = numOfMines;
+        this.gameStatus = "Normal"
         this.points = 0;
         for (let x = 0; x < width; x++) {
             let subCol = [];
