@@ -59,12 +59,15 @@ export default class Board {
 
     //toggle cell - left click
     unveilCell = (e, cell) => {
-        if (e.shiftKey)
-            this.flagClick()
-        else {
+        if (e.shiftKey) {
+            this.flagClick();
+            this.checkIfWin();
+        } else {
             cell.toggleRevealed();
             if (cell.isBomb())
                 this.gameStatus = "Lose";
+            else this.checkIfWin();
+
         }
     };
 
@@ -72,12 +75,13 @@ export default class Board {
     flagClick = (e, cell, setModalFlagShow) => {
         e.preventDefault();
         if (cell.flag) {
-            cell.toggleFlag()
+            cell.toggleFlag();
             this.numOfFlags += 1
         } else {
             if (this.numOfFlags > 0) {
-                cell.toggleFlag()
+                cell.toggleFlag();
                 this.numOfFlags -= 1
+                this.checkIfWin();
             } else {
                 setModalFlagShow(true)
             }
@@ -134,6 +138,11 @@ export default class Board {
         return this.board[x][y].value === "B";
     }
 
+    //check if cell has a flag
+    isFlag(x, y) {
+        return this.board[x][y].flag === true;
+    }
+
     //go over board and update value of cells around bombs
     setCellNeighbours = () => {
         for (let x = 0; x < this.width; x++) {
@@ -178,5 +187,16 @@ export default class Board {
         return this.board;
     }
 
-
+    checkIfWin = () => {
+        if (this.numOfFlags === 0) {
+            for (let x = 0; x < this.width; x++) {
+                for (let y = 0; y < this.height; y++) {
+                    //check for every cell if it has a bomb and if it is flagged
+                    if ((this.isBomb(x, y) && !this.isFlag(x, y)) || (!this.isBomb(x, y) && this.isFlag(x, y)))
+                        return
+                }
+            }
+            this.gameStatus = "Win"
+        }
+    }
 }

@@ -1,9 +1,7 @@
 import {Col, Container, Form, FormControl, InputGroup, Row} from "react-bootstrap";
 import React from "react";
-import {useBoard} from "../Context/GameProvidor";
 
 export default function Settings({height, onChangeHeight, width, onChangeWidth, numOfMines, onChangeNumOfMines, numOfFlags}) {
-    const game = useBoard();
 
     return (
         <>

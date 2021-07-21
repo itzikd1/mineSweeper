@@ -7,7 +7,8 @@ import {CenteredModal} from "./PopUpModel/CenteredModal";
 function Cell({cell}) {
     const {revealed, flag, value} = cell;
     const game = useBoard();
-    const [modalShow, setModalShow] = useState(false);
+    const [modalShowLose, setModalShowLose] = useState(false);
+    const [modalShowWin, setModalShowWin] = useState(false);
     const [modalFlagShow, setModalFlagShow] = useState(false);
 
     function cellState() {
@@ -22,20 +23,32 @@ function Cell({cell}) {
     return (
         <>
             <Button
-                onContextMenu={(e) => game.flagClick(e, cell, setModalFlagShow)}
+                onContextMenu={(e) => {
+                    game.flagClick(e, cell, setModalFlagShow)
+                    if (game.gameStatus === "Win")
+                        setModalShowWin(true);
+                }}
                 onClick={(e) => {
                     game.unveilCell(e, cell);
-                    if (game.gameStatus === "Lose") {
-                        setModalShow(true);
-                    }
+                    if (game.gameStatus === "Lose")
+                        setModalShowLose(true);
+                    if (game.gameStatus === "Win")
+                        setModalShowWin(true);
                 }
                 }>
                 {cellState()}</Button>
-            <CenteredModal show={modalShow} onHide={() => {
-                setModalShow(false);
+            <CenteredModal show={modalShowLose} onHide={() => {
+                setModalShowLose(false);
                 game.gameStatus = "Lost"
             }}
                            title={"You Lost!"} text={"You hit a bomb"}/>
+
+            <CenteredModal show={modalShowWin} onHide={() => {
+                setModalShowWin(false);
+                game.gameStatus = "Won"
+            }}
+                           title={"You Won!"} text={"You have found all the bombs!"}/>
+
             <CenteredModal show={modalFlagShow} onHide={() => {
                 setModalFlagShow(false);
             }}

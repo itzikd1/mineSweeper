@@ -13,7 +13,6 @@ function App() {
     const [height, setHeight] = useState(3);
     const [width, setWidth] = useState(3);
     const [numOfMines, setNumOfMines] = useState(2);
-    const [numOfFlags, setNumOfFlags] = useState();
 
     return (
         <div className="App">
