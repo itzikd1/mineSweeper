@@ -22,9 +22,9 @@ function App() {
             <Button variant="success" onClick={() => {
                 game.startGame(height, width, numOfMines)
             }}>Start Game</Button>
-            <Button variant="success" onClick={() => {
-                game.deployMines()
-            }}>Deploy Mines</Button>
+            <Button variant="warning" onClick={() => {
+                game.setCellNeighbours()
+            }}>update neigbors</Button>
             <BoardHtml></BoardHtml>
         </div>
     );

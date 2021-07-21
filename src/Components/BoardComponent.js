@@ -10,9 +10,9 @@ function BoardComponent() {
     return (<>
             {game.board.map((row, x) => {
                 return (
-                    <div>
+                    <div key={x}>
                         {row.map((cell, y) => (
-                            <CellHtml cell={cell}/>
+                            <CellHtml key={y} cell={cell}/>
                         ))}
                     </div>
                 );

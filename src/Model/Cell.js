@@ -16,10 +16,6 @@ export default class Cell {
         makeAutoObservable(this);
     }
 
-    getVal = () => {
-        return this.value
-    };
-
     setBomb = () => (this.value = "B"); //B means bomb
 
     toggleFlag = () => {
