@@ -11,3 +11,12 @@
     display: flex;
     flex-direction: column;
 }
+
+img{
+    max-width: 20px;
+}
+
+.img-trans{
+    opacity: 0.5;
+    max-width: 20px;
+}

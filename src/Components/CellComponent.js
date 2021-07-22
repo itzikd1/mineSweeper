@@ -3,6 +3,7 @@ import {useBoard} from "../Context/GameProvidor";
 import React, {useState} from "react";
 import {CenteredModal} from "./PopUpModel/CenteredModal";
 import "../Css/board.css";
+import {Container} from "react-bootstrap";
 
 function Cell({cell}) {
     const {revealed, flag, value, superman} = cell;
@@ -13,18 +14,25 @@ function Cell({cell}) {
 
     //cell display
     function cellState() {
-        if(superman)
-            return <img style={{maxWidth: "20px"}} src={8 + ".png"} alt={"Value"}/>;
+        if (superman) {
+            if (flag)
+                return <img className='img-trans' src={"flag.png"} alt={"Flag"}/>;
+            if (cell.isBomb())
+                return <img className='img-trans' src={"bomb.png"} alt={"Bomb"}/>;
+            else {
+                return <img className='img-trans' src={value + ".png"} alt={"Value"}/>;
+            }
+        }
         if (flag) {
-            return <img style={{maxWidth: "20px"}} src={"flag.png"} alt={"Flag"}/>;
+            return <img src={"flag.png"} alt={"Flag"}/>;
         } else if (revealed)
             if (cell.isBomb())
-                return <img style={{maxWidth: "20px"}} src={"bomb.png"} alt={"Bomb"}/>;
+                return <img src={"bomb.png"} alt={"Bomb"}/>;
             else {
-                return <img style={{maxWidth: "20px"}} src={value + ".png"} alt={"Value"}/>;
+                return <img src={value + ".png"} alt={"Value"}/>;
             }
         else
-            return <img style={{maxWidth: "20px"}} src={"question1.png"} alt={"?"}/>;
+            return <img src={"question1.png"} alt={"?"}/>;
     }
 
 
