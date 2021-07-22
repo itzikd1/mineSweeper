@@ -28,9 +28,6 @@ function App() {
                 setNumOfMines(game.numOfMines)
             }}>Start Game</Button>
 
-            <Button onClick={() => {
-                game.exposeZeroNeighbors()
-            }}> Do that thing </Button>
             <BoardComponent/>
         </div>
     );

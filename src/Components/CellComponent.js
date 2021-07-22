@@ -3,6 +3,7 @@ import {useBoard} from "../Context/GameProvidor";
 import {Button} from "react-bootstrap";
 import React, {useState} from "react";
 import {CenteredModal} from "./PopUpModel/CenteredModal";
+import "../Css/board.css";
 
 function Cell({cell}) {
     const {revealed, flag, value,} = cell;
@@ -13,19 +14,20 @@ function Cell({cell}) {
 
     function cellState() {
         if (flag) {
-            return <img style={{maxWidth: "10px"}} src={"flag.png"} alt={"Flag"}/>;
+            return <img style={{maxWidth: "20px"}} src={"flag.png"} alt={"Flag"}/>;
         } else if (revealed)
             if (cell.isBomb())
-                return <img style={{maxWidth: "10px"}} src={"bomb.png"} alt={"Bomb"}/>;
-            else
-                return value;
+                return <img style={{maxWidth: "20px"}} src={"bomb.png"} alt={"Bomb"}/>;
+            else {
+                return <img style={{maxWidth: "20px"}} src={value + ".png"} alt={"Value"}/>;
+            }
         else
-            return <img style={{maxWidth: "20px"}} src={"question1.png"} alt={"Flag"}/>;
+            return <img style={{maxWidth: "20px"}} src={"question1.png"} alt={"?"}/>;
     }
 
     return (
         <>
-            <Button
+            <td
                 onContextMenu={(e) => {
                     game.flagClick(e, cell, setModalFlagShow);
                     if (game.gameStatus === "Win")
@@ -40,7 +42,7 @@ function Cell({cell}) {
                 }
                 }>
                 {cellState()}
-            </Button>
+            </td>
             <CenteredModal show={modalShowLose} onHide={() => {
                 setModalShowLose(false);
                 game.gameStatus = "Lost"
