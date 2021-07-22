@@ -5,7 +5,7 @@ import React, {useState} from "react";
 import {CenteredModal} from "./PopUpModel/CenteredModal";
 
 function Cell({cell}) {
-    const {revealed, flag, value} = cell;
+    const {revealed, flag, value,} = cell;
     const game = useBoard();
     const [modalShowLose, setModalShowLose] = useState(false);
     const [modalShowWin, setModalShowWin] = useState(false);
@@ -13,11 +13,14 @@ function Cell({cell}) {
 
     function cellState() {
         if (flag) {
-            return "F"
+            return <img style={{maxWidth: "10px"}} src={"flag.png"} alt={"Flag"}/>;
         } else if (revealed)
-            return value;
+            if (cell.isBomb())
+                return <img style={{maxWidth: "10px"}} src={"bomb.png"} alt={"Bomb"}/>;
+            else
+                return value;
         else
-            return "?"
+            return <img style={{maxWidth: "20px"}} src={"question1.png"} alt={"Flag"}/>;
     }
 
     return (
@@ -36,7 +39,8 @@ function Cell({cell}) {
                         setModalShowWin(true);
                 }
                 }>
-                {cellState()}</Button>
+                {cellState()}
+            </Button>
             <CenteredModal show={modalShowLose} onHide={() => {
                 setModalShowLose(false);
                 game.gameStatus = "Lost"
