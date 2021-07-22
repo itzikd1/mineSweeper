@@ -25,6 +25,7 @@ function Cell({cell}) {
             return <img style={{maxWidth: "20px"}} src={"question1.png"} alt={"?"}/>;
     }
 
+    
     return (
         <>
             <td
@@ -35,8 +36,10 @@ function Cell({cell}) {
                 }}
                 onClick={(e) => {
                     game.unveilCell(e, cell);
-                    if (game.gameStatus === "Lose")
+                    if (game.gameStatus === "Lose") {
                         setModalShowLose(true);
+                        game.solveBoard()
+                    }
                     if (game.gameStatus === "Win")
                         setModalShowWin(true);
                 }

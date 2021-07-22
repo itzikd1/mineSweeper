@@ -225,6 +225,13 @@ export default class Board {
         }
     };
 
+    solveBoard = () => {
+        for (let x = 0; x < this.width; x++) {
+            for (let y = 0; y < this.height; y++) {
+                this.board[x][y].revealed = true
+            }
+        }
+    }
     //if clicked cell is empty, reveal all the neighbors connected to it
     revealAllEmpty = (x, y) => {
         if (!this.isZero(x, y) || this.isBomb(x, y) || this.isFlag(x, y) || this.board[x][y].revealed)
