@@ -8,7 +8,6 @@ export default class Board {
     board = [];
     numOfMines = 3;
     numOfFlags = 3;
-    points = 0;
     gameStatus = "Normal";
 
     constructor() {
@@ -71,7 +70,6 @@ export default class Board {
         this.setNumOfMines(numOfMines);
         this.numOfFlags = this.numOfMines;
         this.gameStatus = "Normal";
-        this.points = 0;
         //create the board cells
         for (let width = 0; width < this.width; width++) {
             let subCol = [];

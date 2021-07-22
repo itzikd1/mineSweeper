@@ -6,6 +6,7 @@ export default class Cell {
     y;
     revealed;
     flag;
+    superman;
 
     constructor(x, y) {
         this.x = x;
@@ -13,6 +14,7 @@ export default class Cell {
         this.revealed = false;
         this.flag = false;
         this.value = 0;
+        this.superman = 0;
         makeAutoObservable(this);
     }
 
