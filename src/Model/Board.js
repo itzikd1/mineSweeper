@@ -16,59 +16,51 @@ export default class Board {
     }
 
     //set board height - max 300
-    setHeight(value) {
+    setHeight = value => {
         if (value > 300) {
             this.height = 300;
         } else if (value < 1) {
             this.height = 1;
         } else
             this.height = value;
-    }
+    };
 
     //set bored width - max 300
-    setWidth(value) {
+    setWidth = value => {
         if (value > 300)
             this.width = 300;
         else if (value < 1)
             this.width = 1;
         else
             this.width = value;
-    }
+    };
 
     //get board size
-    getBoardSize() {
-        return this.height * this.width
-    }
+    getBoardSize = () => this.height * this.width;
 
     //set number of mines - max as board size
-    setNumOfMines(value) {
+    setNumOfMines = value => {
         if (value > this.getBoardSize())
             this.numOfMines = this.getBoardSize();
         else if (value < 1)
             this.numOfMines = 1;
         else
             this.numOfMines = value;
-    }
+    };
 
     //check if cell is bomb
-    isBomb(x, y) {
-        return this.board[x][y].value === "B";
-    }
+    isBomb = (x, y) => this.board[x][y].value === "B";
 
     //check if cell is zero
-    isZero(x, y) {
-        return this.board[x][y].value === 0;
-    }
+    isZero = (x, y) => this.board[x][y].value === 0;
 
     //check if cell has a flag
-    isFlag(x, y) {
-        return this.board[x][y].flag === true;
-    }
+    isFlag = (x, y) => this.board[x][y].flag === true;
 
     //increase board value at x,y by 1
-    increaseBoardValue(x, y) {
+    increaseBoardValue = (x, y) => {
         this.board[x][y].value += 1
-    }
+    };
 
     //start game, set board size, deploy minds, update numbers according to bombs
     startGame = (height, width, numOfMines) => {
