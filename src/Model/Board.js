@@ -65,6 +65,11 @@ export default class Board {
         return this.board[x][y].flag === true;
     }
 
+    //increase board value at x,y by 1
+    increaseBoardValue(x, y) {
+        this.board[x][y].value += 1
+    }
+
     //start game, set board size, deploy minds, update numbers according to bombs
     startGame = (height, width, numOfMines) => {
         //board properties
@@ -179,34 +184,34 @@ export default class Board {
                 if (this.isBomb(x, y)) {
                     if (x > 0) {
                         if (!this.isBomb(x - 1, y)) {
-                            this.board[x - 1][y].value += 1
+                            this.increaseBoardValue(x - 1, y);
                         }
                         if (y > 0 && !this.isBomb(x - 1, y - 1)) {
-                            this.board[x - 1][y - 1].value += 1
+                            this.increaseBoardValue(x - 1, y - 1);
                         }
                         if (y < this.height - 1 && !this.isBomb(x - 1, y + 1)) {
-                            this.board[x - 1][y + 1].value += 1
+                            this.increaseBoardValue(x - 1, y + 1);
                         }
                     }
                     if (x < this.width - 1) {
                         if (!this.isBomb(x + 1, y)) {
-                            this.board[x + 1][y].value += 1
+                            this.increaseBoardValue(x + 1, y);
                         }
                         if (y > 0 && !this.isBomb(x + 1, y - 1)) {
-                            this.board[x + 1][y - 1].value += 1
+                            this.increaseBoardValue(x + 1, y - 1);
                         }
                         if (y < this.height - 1 && !this.isBomb(x + 1, y + 1)) {
-                            this.board[x + 1][y + 1].value += 1
+                            this.increaseBoardValue(x + 1, y + 1);
                         }
                     }
                     if (y > 0) {
                         if (!this.isBomb(x, y - 1)) {
-                            this.board[x][y - 1].value += 1
+                            this.increaseBoardValue(x, y - 1);
                         }
                     }
                     if (y < this.height - 1) {
                         if (!this.isBomb(x, y + 1)) {
-                            this.board[x][y + 1].value += 1
+                            this.increaseBoardValue(x, y + 1);
                         }
                     }
                 }
@@ -214,7 +219,7 @@ export default class Board {
         }
     };
 
-    //check if all flags are on bombs -> true = win
+//check if all flags are on bombs -> true = win
     checkIfWin = () => {
         if (this.numOfFlags === 0) {
             for (let x = 0; x < this.width; x++) {

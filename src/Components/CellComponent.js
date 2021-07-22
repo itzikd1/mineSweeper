@@ -1,6 +1,5 @@
 import {observer} from "mobx-react";
 import {useBoard} from "../Context/GameProvidor";
-import {Button} from "react-bootstrap";
 import React, {useState} from "react";
 import {CenteredModal} from "./PopUpModel/CenteredModal";
 import "../Css/board.css";
@@ -12,6 +11,7 @@ function Cell({cell}) {
     const [modalShowWin, setModalShowWin] = useState(false);
     const [modalFlagShow, setModalFlagShow] = useState(false);
 
+    //cell display
     function cellState() {
         if (flag) {
             return <img style={{maxWidth: "20px"}} src={"flag.png"} alt={"Flag"}/>;

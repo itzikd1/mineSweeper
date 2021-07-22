@@ -2,7 +2,9 @@ import React from 'react'
 import {Button, Modal} from 'react-bootstrap';
 
 export function CenteredModal(props) {
-
+/*
+// Modal pop up enter title and text with props
+ */
     return (
         <Modal{...props} size="lg" centered>
             <Modal.Header>
