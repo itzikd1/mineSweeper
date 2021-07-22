@@ -8,7 +8,7 @@ import BoardProvider from './Context/GameProvidor';
 
 
 ReactDOM.render(
-    <BoardProvider length={3} height={3} numOfMines={3}>
+    <BoardProvider>
         <App/>
     </BoardProvider>,
     document.getElementById('root')

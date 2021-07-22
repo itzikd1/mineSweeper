@@ -3,11 +3,11 @@ import Cell from "./Cell";
 
 
 export default class Board {
-    height;
-    width;
+    height = 5;
+    width = 5;
     board = [];
-    numOfMines = 1;
-    numOfFlags = 1;
+    numOfMines = 3;
+    numOfFlags = 3;
     points = 0;
     gameStatus = "Normal";
 
@@ -19,13 +19,11 @@ export default class Board {
     setHeight(value) {
         if (value > 300) {
             this.height = 300;
-        }
-        else if (value < 1) {
+        } else if (value < 1) {
             this.height = 1;
         } else
             this.height = value;
-        }
-
+    }
 
     //set bored width - max 300
     setWidth(value) {
@@ -40,6 +38,16 @@ export default class Board {
     //get board size
     getBoardSize() {
         return this.height * this.width
+    }
+
+    //set number of mines - max as board size
+    setNumOfMines(value) {
+        if (value > this.getBoardSize())
+            this.numOfMines = this.getBoardSize();
+        else if (value < 1)
+            this.numOfMines = 1;
+        else
+            this.numOfMines = value;
     }
 
     //check if cell is bomb
@@ -57,19 +65,21 @@ export default class Board {
         return this.board[x][y].flag === true;
     }
 
-//start game, set board size, deploy minds, update numbers according to bombs
+    //start game, set board size, deploy minds, update numbers according to bombs
     startGame = (height, width, numOfMines) => {
+        //board properties
         this.board = [];
         this.setHeight(height);
         this.setWidth(width);
-        this.numOfMines = numOfMines;
-        this.numOfFlags = numOfMines;
+        this.setNumOfMines(numOfMines);
+        this.numOfFlags = this.numOfMines;
         this.gameStatus = "Normal";
         this.points = 0;
-        for (let x = 0; x < this.width; x++) {
+        //create the board cells
+        for (let width = 0; width < this.width; width++) {
             let subCol = [];
-            for (let y = 0; y < this.height; y++) {
-                subCol.push(new Cell(x, y));
+            for (let height = 0; height < this.height; height++) {
+                subCol.push(new Cell(width, height));
             }
             this.board.push(subCol);
         }
@@ -82,10 +92,12 @@ export default class Board {
 
     //toggle cell - left click
     unveilCell = (e, cell) => {
+        //shift key + left click --> flag mode
         if (e.shiftKey) {
             this.flagClick();
             this.checkIfWin();
         } else {
+            //regular click
             if (cell.revealed && cell.isBomb())
                 return;
             else if (cell.value === 0) {
@@ -95,8 +107,8 @@ export default class Board {
                 cell.toggleRevealed();
             if (cell.isBomb())
                 this.gameStatus = "Lose";
-            else this.checkIfWin();
-
+            else
+                this.checkIfWin();
         }
     };
 
@@ -104,15 +116,18 @@ export default class Board {
     flagClick = (e, cell, setModalFlagShow) => {
         e.preventDefault();
         if (!cell.revealed) {
+            //remove flag
             if (cell.flag) {
                 cell.toggleFlag();
                 this.numOfFlags += 1
             } else {
+                //add flag
                 if (this.numOfFlags > 0) {
                     cell.toggleFlag();
                     this.numOfFlags -= 1;
                     this.checkIfWin();
                 } else {
+                    //if no flags left
                     setModalFlagShow(true)
                 }
             }
@@ -155,7 +170,6 @@ export default class Board {
                 countLoop++
             }
         }
-        return this.board;
     }
 
     //go over board and update value of cells around bombs
@@ -257,7 +271,6 @@ export default class Board {
 
     //go over board and update value of cells around zeroes
     exposeZeroNeighbors = () => {
-        console.log("im in func");
         for (let x = 0; x < this.width; x++) {
             for (let y = 0; y < this.height; y++) {
 

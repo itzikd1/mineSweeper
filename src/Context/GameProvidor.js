@@ -8,8 +8,8 @@ export function useBoard() {
     return useContext(GameContext);
 }
 
-export default function GameProvider({children, length, height, numOfMines}) {
-    const game = useLocalObservable(() => new Board(length, height, numOfMines));
+export default function GameProvider({children}) {
+    const game = useLocalObservable(() => new Board());
     return (
         <GameContext.Provider value={game}>
             {children}
