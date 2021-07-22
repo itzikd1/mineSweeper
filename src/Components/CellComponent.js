@@ -14,7 +14,7 @@ function Cell({cell}) {
 
     //cell display
     function cellState() {
-        if (superman) {
+        if (superman&&!revealed) {
             if (flag)
                 return <img className='img-trans' src={"flag.png"} alt={"Flag"}/>;
             if (cell.isBomb())
