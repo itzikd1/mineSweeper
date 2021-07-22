@@ -23,12 +23,12 @@ function App() {
 
             <Button variant="success" onClick={() => {
                 game.startGame(height, width, numOfMines);
-                setHeight(game.height);
-                setWidth(game.width);
+                game.setHeight(game.height);
+                game.setWidth(game.width);
             }}>Start Game</Button>
 
             <Button onClick={() => {game.exposeZeroNeighbors()}}> Do that thing </Button>
-            <BoardComponent></BoardComponent>
+            <BoardComponent/>
         </div>
     );
 }

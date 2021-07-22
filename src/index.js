@@ -4,13 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import BoardProvidor from './Context/GameProvidor';
+import BoardProvider from './Context/GameProvidor';
 
 
 ReactDOM.render(
-    <BoardProvidor length={3} height={3} numOfMines={3}>
+    <BoardProvider length={3} height={3} numOfMines={3}>
         <App/>
-    </BoardProvidor>,
+    </BoardProvider>,
     document.getElementById('root')
 );
 

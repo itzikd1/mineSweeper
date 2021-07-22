@@ -17,20 +17,22 @@ export default class Board {
 
     //set board height - max 300
     setHeight(value) {
-        if (value > 300)
+        if (value > 300) {
             this.height = 300;
-        if (value < 1)
-            this.height = 1
-        else
+        }
+        else if (value < 1) {
+            this.height = 1;
+        } else
             this.height = value;
-    }
+        }
+
 
     //set bored width - max 300
     setWidth(value) {
         if (value > 300)
             this.width = 300;
-        if (value < 1)
-            this.width = 1
+        else if (value < 1)
+            this.width = 1;
         else
             this.width = value;
     }
@@ -58,15 +60,15 @@ export default class Board {
 //start game, set board size, deploy minds, update numbers according to bombs
     startGame = (height, width, numOfMines) => {
         this.board = [];
-        this.height = height;
-        this.width = width;
+        this.setHeight(height);
+        this.setWidth(width);
         this.numOfMines = numOfMines;
         this.numOfFlags = numOfMines;
-        this.gameStatus = "Normal"
+        this.gameStatus = "Normal";
         this.points = 0;
-        for (let x = 0; x < width; x++) {
+        for (let x = 0; x < this.width; x++) {
             let subCol = [];
-            for (let y = 0; y < height; y++) {
+            for (let y = 0; y < this.height; y++) {
                 subCol.push(new Cell(x, y));
             }
             this.board.push(subCol);
@@ -85,9 +87,9 @@ export default class Board {
             this.checkIfWin();
         } else {
             if (cell.revealed && cell.isBomb())
-                return
+                return;
             else if (cell.value === 0) {
-                this.revealAllEmpty(cell.x, cell.y)
+                this.revealAllEmpty(cell.x, cell.y);
                 this.exposeZeroNeighbors()
             } else
                 cell.toggleRevealed();
@@ -108,7 +110,7 @@ export default class Board {
             } else {
                 if (this.numOfFlags > 0) {
                     cell.toggleFlag();
-                    this.numOfFlags -= 1
+                    this.numOfFlags -= 1;
                     this.checkIfWin();
                 } else {
                     setModalFlagShow(true)
@@ -198,7 +200,7 @@ export default class Board {
             }
         }
         return this.board;
-    }
+    };
 
     //check if all flags are on bombs - win
     checkIfWin = () => {
@@ -212,7 +214,7 @@ export default class Board {
             }
             this.gameStatus = "Win"
         }
-    }
+    };
 
     supermanMode = () => {
         for (let x = 0; x < this.width; x++) {
@@ -220,25 +222,25 @@ export default class Board {
                 this.board[x][y].revealed = true;
             }
         }
-    }
+    };
 
     revealAllEmpty(x, y) {
         if (!this.isZero(x, y) || this.isBomb(x, y) || this.isFlag(x, y) || this.board[x][y].revealed)
-            return
-        this.board[x][y].revealed = true
+            return;
+        this.board[x][y].revealed = true;
         if (x > 0) {
             if (this.isZero(x - 1, y))
                 this.revealAllEmpty(x - 1, y);
             if (y > 0 && this.isZero(x - 1, y - 1))
-                this.revealAllEmpty(x - 1, y - 1)
+                this.revealAllEmpty(x - 1, y - 1);
             if (y < this.height - 1 && this.isZero(x - 1, y + 1))
                 this.revealAllEmpty(x - 1, y + 1)
         }
         if (x < this.width - 1) {
             if (this.isZero(x + 1, y))
-                this.revealAllEmpty(x + 1, y)
+                this.revealAllEmpty(x + 1, y);
             if (y > 0 && this.isZero(x + 1, y - 1))
-                this.revealAllEmpty(x + 1, y - 1)
+                this.revealAllEmpty(x + 1, y - 1);
             if (y < this.height - 1 && this.isZero(x + 1, y + 1))
                 this.revealAllEmpty(x + 1, y + 1)
         }
@@ -255,7 +257,7 @@ export default class Board {
 
     //go over board and update value of cells around zeroes
     exposeZeroNeighbors = () => {
-        console.log("im in func")
+        console.log("im in func");
         for (let x = 0; x < this.width; x++) {
             for (let y = 0; y < this.height; y++) {
 
