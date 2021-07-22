@@ -317,7 +317,7 @@ export default class Board {
     supermanMode = () => {
         for (let x = 0; x < this.width; x++) {
             for (let y = 0; y < this.height; y++) {
-                this.board[x][y].revealed = true;
+                this.board[x][y].toggleSuperMan();
             }
         }
     };

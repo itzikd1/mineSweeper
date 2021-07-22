@@ -1,7 +1,9 @@
 import {Col, Container, Form, FormControl, InputGroup, Row} from "react-bootstrap";
 import React from "react";
+import {useBoard} from "../Context/GameProvidor";
 
 export default function SettingsComponent({height, onChangeHeight, width, onChangeWidth, numOfMines, onChangeNumOfMines, numOfFlags}) {
+    const game = useBoard();
 
     return (
         <>
@@ -51,6 +53,7 @@ export default function SettingsComponent({height, onChangeHeight, width, onChan
                                 id="switchEnabled"
                                 type="switch"
                                 label="Super Mode"
+                                onClick={game.supermanMode}
                             />
                         </Form>
                     </Col>

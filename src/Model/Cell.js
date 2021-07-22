@@ -14,7 +14,7 @@ export default class Cell {
         this.revealed = false;
         this.flag = false;
         this.value = 0;
-        this.superman = 0;
+        this.superman = false;
         makeAutoObservable(this);
     }
 
@@ -25,6 +25,10 @@ export default class Cell {
     toggleFlag = () => {
         if (!this.revealed)
             this.flag = !this.flag
+    };
+
+    toggleSuperMan = () => {
+        this.superman = !this.superman
     };
 
     toggleRevealed = () => {

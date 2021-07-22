@@ -5,7 +5,7 @@ import {CenteredModal} from "./PopUpModel/CenteredModal";
 import "../Css/board.css";
 
 function Cell({cell}) {
-    const {revealed, flag, value,} = cell;
+    const {revealed, flag, value, superman} = cell;
     const game = useBoard();
     const [modalShowLose, setModalShowLose] = useState(false);
     const [modalShowWin, setModalShowWin] = useState(false);
@@ -13,6 +13,8 @@ function Cell({cell}) {
 
     //cell display
     function cellState() {
+        if(superman)
+            return <img style={{maxWidth: "20px"}} src={8 + ".png"} alt={"Value"}/>;
         if (flag) {
             return <img style={{maxWidth: "20px"}} src={"flag.png"} alt={"Flag"}/>;
         } else if (revealed)

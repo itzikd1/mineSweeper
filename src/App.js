@@ -24,6 +24,7 @@ function App() {
     return (
         <div className="App">
             <NavBarComponent/>
+
             <GameStatusComponent></GameStatusComponent>
 
             <Setting height={height} onChangeHeight={setHeight} width={width} onChangeWidth={setWidth}
