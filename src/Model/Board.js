@@ -87,7 +87,6 @@ export default class Board {
         this.deployMines();
         //set numbers around bombs
         this.setCellNeighbours();
-        return this;
     };
 
     //toggle cell - left click
@@ -135,7 +134,7 @@ export default class Board {
     };
 
     //deploy mines in random way
-    deployMines() {
+    deployMines = () => {
         //create random array - way to deploy minds
         let randNums = [];
         for (let i = 0; i < this.getBoardSize(); i++) {
@@ -170,7 +169,7 @@ export default class Board {
                 countLoop++
             }
         }
-    }
+    };
 
     //go over board and update value of cells around bombs
     setCellNeighbours = () => {
@@ -213,10 +212,9 @@ export default class Board {
                 }
             }
         }
-        return this.board;
     };
 
-    //check if all flags are on bombs - win
+    //check if all flags are on bombs -> true = win
     checkIfWin = () => {
         if (this.numOfFlags === 0) {
             for (let x = 0; x < this.width; x++) {
@@ -230,18 +228,13 @@ export default class Board {
         }
     };
 
-    supermanMode = () => {
-        for (let x = 0; x < this.width; x++) {
-            for (let y = 0; y < this.height; y++) {
-                this.board[x][y].revealed = true;
-            }
-        }
-    };
-
-    revealAllEmpty(x, y) {
+    //if clicked cell is empty, reveal all the neighbors connected to it
+    revealAllEmpty = (x, y) => {
         if (!this.isZero(x, y) || this.isBomb(x, y) || this.isFlag(x, y) || this.board[x][y].revealed)
             return;
         this.board[x][y].revealed = true;
+        //check neighbors in recursion
+        //left side
         if (x > 0) {
             if (this.isZero(x - 1, y))
                 this.revealAllEmpty(x - 1, y);
@@ -250,6 +243,7 @@ export default class Board {
             if (y < this.height - 1 && this.isZero(x - 1, y + 1))
                 this.revealAllEmpty(x - 1, y + 1)
         }
+        //right side
         if (x < this.width - 1) {
             if (this.isZero(x + 1, y))
                 this.revealAllEmpty(x + 1, y);
@@ -258,23 +252,24 @@ export default class Board {
             if (y < this.height - 1 && this.isZero(x + 1, y + 1))
                 this.revealAllEmpty(x + 1, y + 1)
         }
+        //above
         if (y > 0) {
             if (this.isZero(x, y - 1))
                 this.revealAllEmpty(x, y - 1)
         }
+        //under
         if (y < this.height - 1) {
             if (this.isZero(x, y + 1))
                 this.revealAllEmpty(x, y + 1)
         }
-    }
+    };
 
-
-    //go over board and update value of cells around zeroes
+    //go over board and reveal numbers around the zeroes
     exposeZeroNeighbors = () => {
         for (let x = 0; x < this.width; x++) {
             for (let y = 0; y < this.height; y++) {
-
                 if (this.isZero(x, y) && this.board[x][y].revealed === true) {
+                    //left side
                     if (x > 0) {
                         if (!this.isBomb(x - 1, y) && !this.isFlag(x - 1, y)) {
                             this.board[x - 1][y].revealed = true
@@ -286,6 +281,7 @@ export default class Board {
                             this.board[x - 1][y + 1].revealed = true
                         }
                     }
+                    //right side
                     if (x < this.width - 1) {
                         if (!this.isBomb(x + 1, y) && !this.isFlag(x + 1, y)) {
                             this.board[x + 1][y].revealed = true
@@ -297,11 +293,13 @@ export default class Board {
                             this.board[x + 1][y + 1].revealed = true
                         }
                     }
+                    //above
                     if (y > 0) {
                         if (!this.isBomb(x, y - 1) && !this.isFlag(x, y - 1)) {
                             this.board[x][y - 1].revealed = true
                         }
                     }
+                    //under
                     if (y < this.height - 1) {
                         if (!this.isBomb(x, y + 1) && !this.isFlag(x, y + 1)) {
                             this.board[x][y + 1].revealed = true
@@ -312,4 +310,13 @@ export default class Board {
         }
         return this.board;
     }
+
+
+    supermanMode = () => {
+        for (let x = 0; x < this.width; x++) {
+            for (let y = 0; y < this.height; y++) {
+                this.board[x][y].revealed = true;
+            }
+        }
+    };
 }
