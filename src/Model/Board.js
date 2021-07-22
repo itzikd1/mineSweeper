@@ -6,8 +6,8 @@ export default class Board {
     height;
     width;
     board = [];
-    numOfMines = 2;
-    numOfFlags = 2;
+    numOfMines = 1;
+    numOfFlags = 1;
     points = 0;
     gameStatus = "Normal";
 
@@ -86,9 +86,10 @@ export default class Board {
         } else {
             if (cell.revealed && cell.isBomb())
                 return
-            else if (cell.value === 0)
+            else if (cell.value === 0) {
                 this.revealAllEmpty(cell.x, cell.y)
-            else
+                this.exposeZeroNeighbors()
+            } else
                 cell.toggleRevealed();
             if (cell.isBomb())
                 this.gameStatus = "Lose";
@@ -227,7 +228,7 @@ export default class Board {
         this.board[x][y].revealed = true
         if (x > 0) {
             if (this.isZero(x - 1, y))
-                this.revealAllEmpty(x - 1, y)
+                this.revealAllEmpty(x - 1, y);
             if (y > 0 && this.isZero(x - 1, y - 1))
                 this.revealAllEmpty(x - 1, y - 1)
             if (y < this.height - 1 && this.isZero(x - 1, y + 1))
@@ -249,5 +250,51 @@ export default class Board {
             if (this.isZero(x, y + 1))
                 this.revealAllEmpty(x, y + 1)
         }
+    }
+
+
+    //go over board and update value of cells around zeroes
+    exposeZeroNeighbors = () => {
+        console.log("im in func")
+        for (let x = 0; x < this.width; x++) {
+            for (let y = 0; y < this.height; y++) {
+
+                if (this.isZero(x, y) && this.board[x][y].revealed === true) {
+                    if (x > 0) {
+                        if (!this.isBomb(x - 1, y) && !this.isFlag(x - 1, y)) {
+                            this.board[x - 1][y].revealed = true
+                        }
+                        if (y > 0 && !this.isBomb(x - 1, y - 1) && !this.isFlag(x - 1, y - 1)) {
+                            this.board[x - 1][y - 1].revealed = true
+                        }
+                        if (y < this.height - 1 && !this.isBomb(x - 1, y + 1) && !this.isFlag(x - 1, y + 1)) {
+                            this.board[x - 1][y + 1].revealed = true
+                        }
+                    }
+                    if (x < this.width - 1) {
+                        if (!this.isBomb(x + 1, y) && !this.isFlag(x + 1, y)) {
+                            this.board[x + 1][y].revealed = true
+                        }
+                        if (y > 0 && !this.isBomb(x + 1, y - 1) && !this.isFlag(x + 1, y - 1)) {
+                            this.board[x + 1][y - 1].revealed = true
+                        }
+                        if (y < this.height - 1 && !this.isBomb(x + 1, y + 1) && !this.isFlag(x + 1, y + 1)) {
+                            this.board[x + 1][y + 1].revealed = true
+                        }
+                    }
+                    if (y > 0) {
+                        if (!this.isBomb(x, y - 1) && !this.isFlag(x, y - 1)) {
+                            this.board[x][y - 1].revealed = true
+                        }
+                    }
+                    if (y < this.height - 1) {
+                        if (!this.isBomb(x, y + 1) && !this.isFlag(x, y + 1)) {
+                            this.board[x][y + 1].revealed = true
+                        }
+                    }
+                }
+            }
+        }
+        return this.board;
     }
 }

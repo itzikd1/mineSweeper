@@ -10,9 +10,9 @@ import {observer} from "mobx-react";
 
 function App() {
     const game = useBoard();
-    const [height, setHeight] = useState(3);
-    const [width, setWidth] = useState(3);
-    const [numOfMines, setNumOfMines] = useState(2);
+    const [height, setHeight] = useState(5);
+    const [width, setWidth] = useState(5);
+    const [numOfMines, setNumOfMines] = useState(1);
 
     return (
         <div className="App">
@@ -26,6 +26,8 @@ function App() {
                 setHeight(game.height);
                 setWidth(game.width);
             }}>Start Game</Button>
+
+            <Button onClick={() => {game.exposeZeroNeighbors()}}> Do that thing </Button>
             <BoardComponent></BoardComponent>
         </div>
     );
