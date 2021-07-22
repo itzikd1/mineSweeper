@@ -32,9 +32,6 @@ function App() {
             }}>Start Game</Button>
 
             <BoardComponent/>
-
-            <TimerView timer={myTimer}/>
-
         </div>
     );
 }
