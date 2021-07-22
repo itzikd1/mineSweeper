@@ -25,14 +25,16 @@ function Cell({cell}) {
             return <img style={{maxWidth: "20px"}} src={"question1.png"} alt={"?"}/>;
     }
 
-    
+
     return (
         <>
             <td
                 onContextMenu={(e) => {
                     game.flagClick(e, cell, setModalFlagShow);
-                    if (game.gameStatus === "Win")
+                    if (game.gameStatus === "Win") {
                         setModalShowWin(true);
+                        game.solveBoard()
+                    }
                 }}
                 onClick={(e) => {
                     game.unveilCell(e, cell);
@@ -40,12 +42,16 @@ function Cell({cell}) {
                         setModalShowLose(true);
                         game.solveBoard()
                     }
-                    if (game.gameStatus === "Win")
+                    if (game.gameStatus === "Win") {
                         setModalShowWin(true);
+                        game.solveBoard()
+                    }
                 }
                 }>
                 {cellState()}
             </td>
+
+            {/*modals*/}
             <CenteredModal show={modalShowLose} onHide={() => {
                 setModalShowLose(false);
                 game.gameStatus = "Lost"

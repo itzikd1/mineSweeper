@@ -3,9 +3,10 @@ import './App.css';
 import {Button} from 'react-bootstrap';
 import {useBoard} from "./Context/GameProvidor";
 import {observer} from "mobx-react";
-import NavBar from './Components/NavBar';
-import Setting from './Components/Settings'
+import NavBarComponent from './Components/NavBarComponent';
+import Setting from './Components/SettingsComponent'
 import BoardComponent from "./Components/BoardComponent";
+import GameStatusComponent from "./Components/GameStatusComponent";
 
 function App() {
     const game = useBoard();
@@ -22,7 +23,8 @@ function App() {
 
     return (
         <div className="App">
-            <NavBar/>
+            <NavBarComponent/>
+            <GameStatusComponent></GameStatusComponent>
 
             <Setting height={height} onChangeHeight={setHeight} width={width} onChangeWidth={setWidth}
                      numOfMines={numOfMines} onChangeNumOfMines={setNumOfMines} numOfFlags={game.numOfFlags}/>

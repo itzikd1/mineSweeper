@@ -1,7 +1,7 @@
 import {Col, Container, Form, FormControl, InputGroup, Row} from "react-bootstrap";
 import React from "react";
 
-export default function Settings({height, onChangeHeight, width, onChangeWidth, numOfMines, onChangeNumOfMines, numOfFlags}) {
+export default function SettingsComponent({height, onChangeHeight, width, onChangeWidth, numOfMines, onChangeNumOfMines, numOfFlags}) {
 
     return (
         <>
