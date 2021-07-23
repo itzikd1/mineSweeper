@@ -54,7 +54,6 @@ export default function SettingsComponent({height, onChangeHeight, width, onChan
                                 type="switch"
                                 label="Test Super Mode"
                                 onClick={game.supermanMode}
-                                
                             />
                         </Form>
                     </Col>
