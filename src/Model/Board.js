@@ -98,8 +98,9 @@ export default class Board {
             if (cell.revealed && cell.isBomb())
                 return;
             else if (cell.value === 0) {
-                this.revealAllEmpty(cell.x, cell.y);
-                this.exposeZeroNeighbors()
+                this.revealConnectedCells(cell)
+                // this.revealAllEmpty(cell.x, cell.y);
+                // this.exposeZeroNeighbors()
             } else
                 cell.toggleRevealed();
             if (cell.isBomb())
@@ -235,39 +236,42 @@ export default class Board {
     };
     //if clicked cell is empty, reveal all the neighbors connected to it
     revealAllEmpty = (x, y) => {
+        this.board[x][y].visited = true;
+        let cellToOpen = [];
+
         if (!this.isZero(x, y) || this.isBomb(x, y) || this.isFlag(x, y) || this.board[x][y].revealed)
             return;
         this.board[x][y].revealed = true;
-        this.board[x][y].toggleVisited();
-        //check neighbors in recursion
+        //check neighbors
         //left side
         if (x > 0) {
             if (this.isZero(x - 1, y) && !this.isVisited(x - 1, y))
-                this.revealAllEmpty(x - 1, y);
+                cellToOpen.push(this.board[x - 1][y]);
             if (y > 0 && this.isZero(x - 1, y - 1) && !this.isVisited(x - 1, y - 1))
-                this.revealAllEmpty(x - 1, y - 1);
+                cellToOpen.push(this.board[x - 1][y - 1]);
             if (y < this.height - 1 && this.isZero(x - 1, y + 1) && !this.isVisited(x - 1, y + 1))
-                this.revealAllEmpty(x - 1, y + 1)
+                cellToOpen.push(this.board[x - 1][y + 1]);
         }
         //right side
         if (x < this.width - 1) {
             if (this.isZero(x + 1, y) && !this.isVisited(x + 1, y))
-                this.revealAllEmpty(x + 1, y);
+                cellToOpen.push(this.board[x + 1][y]);
             if (y > 0 && this.isZero(x + 1, y - 1) && !this.isVisited(x + 1, y - 1))
-                this.revealAllEmpty(x + 1, y - 1);
+                cellToOpen.push(this.board[x + 1][y - 1]);
             if (y < this.height - 1 && this.isZero(x + 1, y + 1) && !this.isVisited(x + 1, y + 1))
-                this.revealAllEmpty(x + 1, y + 1)
+                cellToOpen.push(this.board[x + 1][y + 1]);
         }
         //above
         if (y > 0) {
             if (this.isZero(x, y - 1) && !this.isVisited(x, y - 1))
-                this.revealAllEmpty(x, y - 1)
+                cellToOpen.push(this.board[x][y - 1]);
         }
         //under
         if (y < this.height - 1) {
             if (this.isZero(x, y + 1) && !this.isVisited(x, y + 1))
-                this.revealAllEmpty(x, y + 1)
+                cellToOpen.push(this.board[x][y + 1]);
         }
+        return cellToOpen;
     };
 
     //go over board and reveal numbers around the zeroes
@@ -325,4 +329,22 @@ export default class Board {
             }
         }
     };
+
+    //if clicked cell is empty, reveal all the neighbors connected to it
+    revealConnectedCells = (currentCell) => {
+        let cellToOpen = [currentCell];
+        //while we didn't go over all cells
+        while (cellToOpen.length > 0) {
+            let nextBlock = cellToOpen.pop();
+            if (!nextBlock.visited) {
+                //get neighbors and add to list
+                let additionalBlocksToOpen = this.revealAllEmpty(nextBlock.x, nextBlock.y);
+                if (additionalBlocksToOpen.length > 0) {
+                    cellToOpen = [...cellToOpen, ...additionalBlocksToOpen];
+                }
+            }
+        }
+    }
+
+
 }
