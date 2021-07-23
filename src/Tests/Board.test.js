@@ -78,7 +78,7 @@ test('create more mines then board size, number of mines should be 25', () => {
 
 
 test('start game - check number of mines,height and width', () => {
-    board.startGame(2,2,2);
+    board.startGame(2, 2, 2);
     expect(board.numOfMines).toBe(2);
     expect(board.height).toBe(2);
     expect(board.width).toBe(2);
@@ -86,17 +86,17 @@ test('start game - check number of mines,height and width', () => {
 
 
 test('start game - check number of mines,flags,zeroes on board', () => {
-    board.startGame(2,2,2);
-    let countBombs=0
-    let countZeroes= 0
-    let countFlag= 0
-    for(let i=0; i<board.height; i++)
-        for(let j=0; j<board.width; j++) {
+    board.startGame(2, 2, 2);
+    let countBombs = 0;
+    let countZeroes = 0;
+    let countFlag = 0;
+    for (let i = 0; i < board.height; i++)
+        for (let j = 0; j < board.width; j++) {
             if (board.isBomb(i, j))
                 countBombs++;
-            if(board.isZero(i,j))
+            if (board.isZero(i, j))
                 countZeroes++;
-            if(board.isFlag(i,j))
+            if (board.isFlag(i, j))
                 countFlag++;
         }
     expect(countBombs).toBe(2);
@@ -104,3 +104,17 @@ test('start game - check number of mines,flags,zeroes on board', () => {
     expect(countFlag).toBe(0);
 });
 
+test('start game - game status = normal', () => {
+    board.startGame(3, 3, 2);
+    board.checkIfWin()
+    expect(board.gameStatus).toBe("Normal");
+});
+
+test('start game - reveal all map', () => {
+    board.startGame(3, 3, 2);
+    board.solveBoard();
+    for (let i = 0; i < board.height; i++)
+        for (let j = 0; j < board.width; j++) {
+            expect(board.board[i][j].revealed).toBeTruthy();
+        }
+});
