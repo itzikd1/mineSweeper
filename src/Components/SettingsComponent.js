@@ -11,7 +11,7 @@ export default function SettingsComponent({height, onChangeHeight, width, onChan
                 <Row>
                     <Col>
                         <Row>
-                            <InputGroup.Text>Board Width</InputGroup.Text>
+                            <InputGroup.Text data-testid='inputWidth'>Board Width</InputGroup.Text>
                             <FormControl
                                 placeholder="Width"
                                 value={height}
@@ -21,7 +21,7 @@ export default function SettingsComponent({height, onChangeHeight, width, onChan
                         </Row>
                     </Col>
                     <Col>
-                        <InputGroup.Text>Board Height</InputGroup.Text>
+                        <InputGroup.Text data-testid='inputHeight'>Board Height</InputGroup.Text>
                         <FormControl
                             placeholder="Height"
                             value={width}
@@ -30,7 +30,7 @@ export default function SettingsComponent({height, onChangeHeight, width, onChan
                         />
                     </Col>
                     <Col>
-                        <InputGroup.Text>Number Of Mines</InputGroup.Text>
+                        <InputGroup.Text data-testid='numMines'>Number Of Mines</InputGroup.Text>
                         <FormControl
                             placeholder="Mines"
                             value={numOfMines}
@@ -39,7 +39,7 @@ export default function SettingsComponent({height, onChangeHeight, width, onChan
                         />
                     </Col>
                     <Col>
-                        <InputGroup.Text>Number Of Flags</InputGroup.Text>
+                        <InputGroup.Text data-testid='numFlags'>Number Of Flags</InputGroup.Text>
                         <FormControl
                             placeholder="Flags"
                             value={numOfFlags}

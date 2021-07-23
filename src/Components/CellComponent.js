@@ -3,7 +3,6 @@ import {useBoard} from "../Context/GameProvidor";
 import React, {useState} from "react";
 import {CenteredModal} from "./PopUpModel/CenteredModal";
 import "../Css/board.css";
-import {Container} from "react-bootstrap";
 
 function Cell({cell}) {
     const {revealed, flag, value, superman} = cell;

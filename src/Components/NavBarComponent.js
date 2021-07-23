@@ -7,7 +7,7 @@ export default function NavBarComponent() {
         <>
             <Navbar bg="light" variant="light">
                 <Container>
-                    <Navbar.Brand href="#">Home</Navbar.Brand>
+                    <Navbar.Brand data-testid='navbar' href="#">Home</Navbar.Brand>
                 </Container>
             </Navbar>
         </>

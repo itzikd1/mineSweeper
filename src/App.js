@@ -25,7 +25,7 @@ function App() {
         <div className="App">
             <NavBarComponent/>
 
-            <GameStatusComponent></GameStatusComponent>
+            <GameStatusComponent/>
 
             <Setting height={height} onChangeHeight={setHeight} width={width} onChangeWidth={setWidth}
                      numOfMines={numOfMines} onChangeNumOfMines={setNumOfMines} numOfFlags={game.numOfFlags}/>
