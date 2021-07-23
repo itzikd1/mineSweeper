@@ -12,7 +12,7 @@ function App() {
     const game = useBoard();
     const [height, setHeight] = useState(5);
     const [width, setWidth] = useState(5);
-    const [numOfMines, setNumOfMines] = useState(1);
+    const [numOfMines, setNumOfMines] = useState(3);
 
     function handleStartGame() {
         game.startGame(height, width, numOfMines);
