@@ -32,6 +32,5 @@ function ModalPopUpComponent({modalShowLose, setModalShowLose, modalShowWin, set
                            text={"You have used all your flags. you cant place anymore flags on the map."}/>
         </>
     );
-};
-
+}
 export default observer(ModalPopUpComponent);

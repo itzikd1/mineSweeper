@@ -106,7 +106,7 @@ test('start game - check number of mines,flags,zeroes on board', () => {
 
 test('start game - game status = normal', () => {
     board.startGame(3, 3, 2);
-    board.checkIfWin()
+    board.checkIfWin();
     expect(board.gameStatus).toBe("Normal");
 });
 

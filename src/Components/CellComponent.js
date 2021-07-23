@@ -1,7 +1,5 @@
 import {observer} from "mobx-react";
-import {useBoard} from "../Context/GameProvidor";
-import React, {useState} from "react";
-import {CenteredModal} from "./PopUpModel/CenteredModal";
+import React from "react";
 import "../Css/board.css";
 
 function Cell({cell, onRightMouseClick, onLeftMouseClick}) {
