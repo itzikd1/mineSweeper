@@ -1,9 +1,8 @@
 # MineSweeper Application built in React.JS and MobX
-
 This project was was created with react.Js using MobX observer and react bootstrap for GUI
-
+## Game Link
+https://itzikd1.github.io/minesGame/
 ## Available Scripts
-
 In the project directory, you can run:
 ### `yarn start`
 Runs the app in the development mode.\
