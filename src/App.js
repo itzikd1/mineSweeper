@@ -30,9 +30,9 @@ function App() {
             <Setting height={height} onChangeHeight={setHeight} width={width} onChangeWidth={setWidth}
                      numOfMines={numOfMines} onChangeNumOfMines={setNumOfMines} numOfFlags={game.numOfFlags}/>
 
-            <Button variant="success" onClick={() => {
-                handleStartGame();
-            }}>Start Game</Button>
+            <Button variant="success" onClick={
+                handleStartGame
+            }>Start Game</Button>
 
             <BoardComponent/>
         </div>

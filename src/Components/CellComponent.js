@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import {useBoard} from "../Context/GameProvidor";
 import React, {useState} from "react";
-import {CenteredModal} from "./PopUpModel/CenteredModal";
+import {CenteredModal} from "./PopUpModal/CenteredModal";
 import "../Css/board.css";
 
 function Cell({cell}) {
@@ -12,7 +12,7 @@ function Cell({cell}) {
     const [modalFlagShow, setModalFlagShow] = useState(false);
 
     //cell display
-    function cellState() {
+    function getCellImage() {
         if (superman&&!revealed) {
             if (flag)
                 return <img className='img-trans' src={"flag.png"} alt={"Flag"}/>;
@@ -38,6 +38,7 @@ function Cell({cell}) {
     return (
         <>
             <td
+                //todo take out to function both + move to board if possible
                 onContextMenu={(e) => {
                     game.flagClick(e, cell, setModalFlagShow);
                     if (game.gameStatus === "Win") {
@@ -57,9 +58,10 @@ function Cell({cell}) {
                     }
                 }
                 }>
-                {cellState()}
+                {getCellImage()}
             </td>
 
+            {/*todo take out modal from here to game - not cell*/}
             {/*modals*/}
             <CenteredModal show={modalShowLose} onHide={() => {
                 setModalShowLose(false);

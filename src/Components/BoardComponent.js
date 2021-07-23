@@ -10,11 +10,11 @@ function BoardComponent() {
 
     return (<>
             <Container className='board-container'>
-                {game.board.map((row, x) => {
+                {game.board.map((row, rowIndex) => {
                     return (
-                        <tr key={x}>
-                            {row.map((cell, y) => (
-                                <CellComponent className='cell-container' key={y} cell={cell}/>
+                        <tr key={rowIndex}>
+                            {row.map((cell, colIndex) => (
+                                <CellComponent className='cell-container' key={colIndex} cell={cell}/>
                             ))}
                         </tr>
                     );
