@@ -1,4 +1,5 @@
 {
+  "homepage": "http://itzikd1.github.io/minesGame",
   "name": "mines_react_js",
   "version": "0.1.0",
   "private": true,
@@ -7,6 +8,7 @@
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "5.0.2",
+    "gh-pages": "^3.2.3",
     "mobx": "^6.3.2",
     "mobx-react": "^7.2.0",
     "mobx-react-lite": "^3.2.0",
@@ -21,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
