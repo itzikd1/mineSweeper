@@ -1,19 +1,15 @@
 import {observer} from "mobx-react";
 import {useBoard} from "../Context/GameProvidor";
 import React, {useState} from "react";
-import {CenteredModal} from "./PopUpModal/CenteredModal";
+import {CenteredModal} from "./PopUpModel/CenteredModal";
 import "../Css/board.css";
 
-function Cell({cell}) {
+function Cell({cell, onRightMouseClick, onLeftMouseClick}) {
     const {revealed, flag, value, superman} = cell;
-    const game = useBoard();
-    const [modalShowLose, setModalShowLose] = useState(false);
-    const [modalShowWin, setModalShowWin] = useState(false);
-    const [modalFlagShow, setModalFlagShow] = useState(false);
 
     //cell display
     function getCellImage() {
-        if (superman&&!revealed) {
+        if (superman && !revealed) {
             if (flag)
                 return <img className='img-trans' src={"flag.png"} alt={"Flag"}/>;
             if (cell.isBomb())
@@ -38,48 +34,10 @@ function Cell({cell}) {
     return (
         <>
             <td
-                //todo take out to function both + move to board if possible
-                onContextMenu={(e) => {
-                    game.flagClick(e, cell, setModalFlagShow);
-                    if (game.gameStatus === "Win") {
-                        setModalShowWin(true);
-                        game.solveBoard()
-                    }
-                }}
-                onClick={(e) => {
-                    game.unveilCell(e, cell);
-                    if (game.gameStatus === "Lose") {
-                        setModalShowLose(true);
-                        game.solveBoard()
-                    }
-                    if (game.gameStatus === "Win") {
-                        setModalShowWin(true);
-                        game.solveBoard()
-                    }
-                }
-                }>
+                onContextMenu={onRightMouseClick(cell)}
+                onClick={onLeftMouseClick(cell)}>
                 {getCellImage()}
             </td>
-
-            {/*todo take out modal from here to game - not cell*/}
-            {/*modals*/}
-            <CenteredModal show={modalShowLose} onHide={() => {
-                setModalShowLose(false);
-                game.gameStatus = "Lost"
-            }}
-                           title={"You Lost!"} text={"You hit a bomb"}/>
-
-            <CenteredModal show={modalShowWin} onHide={() => {
-                setModalShowWin(false);
-                game.gameStatus = "Won"
-            }}
-                           title={"You Won!"} text={"You have found all the bombs!"}/>
-
-            <CenteredModal show={modalFlagShow} onHide={() => {
-                setModalFlagShow(false);
-            }}
-                           title={"No Flags Left"}
-                           text={"You have used all your flags. you cant place anymore flags on the map."}/>
         </>
     )
 }
