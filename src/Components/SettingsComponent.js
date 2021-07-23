@@ -52,7 +52,7 @@ export default function SettingsComponent({height, onChangeHeight, width, onChan
                             <Form.Check
                                 id="switchEnabled"
                                 type="switch"
-                                label="Test Super Mode"
+                                label="Super Mode"
                                 onClick={game.supermanMode}
                             />
                         </Form>
