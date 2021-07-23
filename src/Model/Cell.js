@@ -7,8 +7,10 @@ export default class Cell {
     revealed;
     flag;
     superman;
+    visited;
 
     constructor(x, y) {
+        this.visited = false
         this.x = x;
         this.y = y;
         this.revealed = false;
@@ -25,6 +27,11 @@ export default class Cell {
     toggleFlag = () => {
         if (!this.revealed)
             this.flag = !this.flag
+    };
+
+    toggleVisited = () => {
+        if (this.visited)
+            this.visited = false
     };
 
     toggleSuperMan = () => {

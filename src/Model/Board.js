@@ -53,6 +53,9 @@ export default class Board {
     //check if cell is zero
     isZero = (x, y) => this.board[x][y].value === 0;
 
+    //check if cell is zero
+    isVisited = (x, y) => this.board[x][y].visited === true;
+
     //check if cell has a flag
     isFlag = (x, y) => this.board[x][y].flag === true;
 
@@ -235,33 +238,34 @@ export default class Board {
         if (!this.isZero(x, y) || this.isBomb(x, y) || this.isFlag(x, y) || this.board[x][y].revealed)
             return;
         this.board[x][y].revealed = true;
+        this.board[x][y].toggleVisited();
         //check neighbors in recursion
         //left side
         if (x > 0) {
-            if (this.isZero(x - 1, y))
+            if (this.isZero(x - 1, y) && !this.isVisited(x - 1, y))
                 this.revealAllEmpty(x - 1, y);
-            if (y > 0 && this.isZero(x - 1, y - 1))
+            if (y > 0 && this.isZero(x - 1, y - 1) && !this.isVisited(x - 1, y - 1))
                 this.revealAllEmpty(x - 1, y - 1);
-            if (y < this.height - 1 && this.isZero(x - 1, y + 1))
+            if (y < this.height - 1 && this.isZero(x - 1, y + 1) && !this.isVisited(x - 1, y + 1))
                 this.revealAllEmpty(x - 1, y + 1)
         }
         //right side
         if (x < this.width - 1) {
-            if (this.isZero(x + 1, y))
+            if (this.isZero(x + 1, y) && !this.isVisited(x + 1, y))
                 this.revealAllEmpty(x + 1, y);
-            if (y > 0 && this.isZero(x + 1, y - 1))
+            if (y > 0 && this.isZero(x + 1, y - 1) && !this.isVisited(x + 1, y - 1))
                 this.revealAllEmpty(x + 1, y - 1);
-            if (y < this.height - 1 && this.isZero(x + 1, y + 1))
+            if (y < this.height - 1 && this.isZero(x + 1, y + 1) && !this.isVisited(x + 1, y + 1))
                 this.revealAllEmpty(x + 1, y + 1)
         }
         //above
         if (y > 0) {
-            if (this.isZero(x, y - 1))
+            if (this.isZero(x, y - 1) && !this.isVisited(x, y - 1))
                 this.revealAllEmpty(x, y - 1)
         }
         //under
         if (y < this.height - 1) {
-            if (this.isZero(x, y + 1))
+            if (this.isZero(x, y + 1) && !this.isVisited(x, y + 1))
                 this.revealAllEmpty(x, y + 1)
         }
     };
