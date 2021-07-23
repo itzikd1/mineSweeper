@@ -21,6 +21,7 @@ function App() {
         setNumOfMines(game.numOfMines)
     }
 
+    
     return (
         <div className="App">
             <NavBarComponent/>
