@@ -99,6 +99,7 @@ export default class Board {
                 return;
             else if (cell.value === 0) {
                 this.revealConnectedCells(cell)
+                
                 // this.revealAllEmpty(cell.x, cell.y);
                 this.exposeZeroNeighbors()
             } else
