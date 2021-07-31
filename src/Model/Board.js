@@ -100,7 +100,7 @@ export default class Board {
             else if (cell.value === 0) {
                 this.revealConnectedCells(cell)
                 // this.revealAllEmpty(cell.x, cell.y);
-                // this.exposeZeroNeighbors()
+                this.exposeZeroNeighbors()
             } else
                 cell.toggleRevealed();
             if (cell.isBomb())
